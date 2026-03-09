@@ -1,1666 +1,358 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MTC COIN - The Future of Decentralized Governance</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">         
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUANX Blockchain | AI Quant Dashboard</title>
     <style>
-        /* CSS Variables with Neon Theme */
-        :root {
-            --primary: #0f0f1e;
-            --secondary: #1a1a2e;
-            --accent: #00d4ff;
-            --neon-blue: #00f3ff;
-            --neon-purple: #b967ff;
-            --neon-pink: #ff00ff;
-            --light: #0a0a0f;
-            --dark: #05050a;
-            --gray: #2a2a3a;
-            --success: #00ff9d;
-            --blue-accent: #0099ff;
-            --transition: all 0.3s ease;
-            --neon-glow: 0 0 10px, 0 0 20px, 0 0 30px;
-        }
-
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            background-color: var(--light);
-            color: #ffffff;
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
-            min-height: 100vh;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(185, 103, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .container {
-            width: 92%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        section {
-            padding: 80px 0;
-            position: relative;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            margin-bottom: 20px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-            color: white;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: neonLine 2s infinite alternate;
-        }
-
-        @keyframes neonLine {
-            0% { box-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent); }
-            100% { box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px var(--accent); }
-        }
-
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 16px 32px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            border: 2px solid var(--accent);
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            text-align: center;
-            min-width: 160px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover {
-            background: linear-gradient(45deg, var(--accent), var(--neon-purple));
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
-            border-color: var(--neon-blue);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--neon-purple);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
-            border-color: var(--neon-pink);
-        }
-
-        .btn-accent {
-            background: linear-gradient(45deg, var(--neon-blue), var(--accent));
-            border: none;
-        }
-
-        /* Header with Neon Effects */
-        header {
-            background: rgba(15, 15, 30, 0.95);
-            color: white;
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 212, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
-            transition: var(--transition);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .logo h1 {
-            font-size: 1.6rem;
-            margin-bottom: 0;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Mobile Navigation with Neon */
-        .mobile-menu {
-            display: block;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1001;
-            padding: 10px;
-            color: var(--accent);
-            text-shadow: 0 0 10px var(--accent);
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            max-width: 350px;
-            height: 100vh;
-            background: rgba(15, 15, 30, 0.98);
-            backdrop-filter: blur(20px);
-            padding: 100px 30px 30px;
-            transition: var(--transition);
-            z-index: 1000;
-            overflow-y: auto;
-            border-left: 1px solid rgba(0, 212, 255, 0.2);
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-        }
-
-        nav.active {
-            right: 0;
-        }
-
-        nav ul {
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.2rem;
-            display: block;
-            padding: 15px 20px;
-            border-radius: 8px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        nav ul li a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        nav ul li a:hover::before {
-            left: 100%;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateX(10px);
-            text-shadow: 0 0 10px var(--accent);
-        }
-
-        .nav-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 999;
-        }
-
-        .nav-overlay.active {
-            display: block;
-        }
-
-        .close-menu {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 1.5rem;
-            color: var(--accent);
-            cursor: pointer;
-            display: block;
-            text-shadow: 0 0 10px var(--accent);
-        }
-
-        /* Hero Section with Advanced Effects */
-        .hero {
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
-            color: white;
-            padding: 150px 0 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(185, 103, 255, 0.2) 0%, transparent 50%);
-            animation: pulse 10s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.7; }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 30px;
-            animation: neonText 3s infinite alternate;
-        }
-
-        @keyframes neonText {
-            0% { text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
-            100% { text-shadow: 0 0 20px rgba(0, 212, 255, 0.8), 0 0 30px rgba(185, 103, 255, 0.5); }
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .hero-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .hero .btn {
-            width: 100%;
-            max-width: 280px;
-            margin: 0 auto;
-            padding: 18px 35px;
-            font-size: 1.1rem;
-        }
-
-        /* Crypto Stats with Neon */
-        .crypto-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 50px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px 20px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--accent), var(--neon-purple), var(--accent));
-            z-index: -1;
-            filter: blur(10px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .stat-card:hover::before {
-            opacity: 1;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
-        }
-
-        .stat-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* About Section with Holographic Image */
-        .about-content {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text {
-            order: 2;
-            width: 100%;
-        }
-
-        .about-image {
-            order: 1;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.5),
-                0 0 60px rgba(0, 212, 255, 0.3),
-                inset 0 0 30px rgba(255, 255, 255, 0.1);
-            position: relative;
-            animation: hologram 6s infinite alternate;
-            border: 2px solid rgba(0, 212, 255, 0.3);
-        }
-
-        @keyframes hologram {
-            0%, 100% { 
-                box-shadow: 
-                    0 20px 40px rgba(0, 0, 0, 0.5),
-                    0 0 40px rgba(0, 212, 255, 0.2),
-                    inset 0 0 20px rgba(255, 255, 255, 0.05);
-                transform: perspective(1000px) rotateX(5deg) rotateY(0deg);
-            }
-            50% { 
-                box-shadow: 
-                    0 20px 40px rgba(0, 0, 0, 0.5),
-                    0 0 60px rgba(185, 103, 255, 0.3),
-                    inset 0 0 30px rgba(255, 255, 255, 0.1);
-                transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
-            }
-        }
-
-        .about-image img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-            filter: contrast(1.2) saturate(1.5);
-        }
-
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Satoshi Nakamoto Section */
-        .satoshi-section {
-            text-align: center;
-            padding: 60px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .satoshi-container {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .satoshi-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 30px;
-            overflow: hidden;
-            position: relative;
-            border: 3px solid rgba(0, 212, 255, 0.3);
-            box-shadow: 
-                0 0 30px rgba(0, 212, 255, 0.3),
-                inset 0 0 30px rgba(0, 212, 255, 0.1);
-            animation: satoshiGlow 4s infinite alternate;
-        }
-
-        @keyframes satoshiGlow {
-            0% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1); }
-            100% { box-shadow: 0 0 40px rgba(185, 103, 255, 0.4), inset 0 0 30px rgba(185, 103, 255, 0.2); }
-        }
-
-        .satoshi-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(0.3) contrast(1.2);
-        }
-
-        /* Token Distribution Section with Neon Effects */
-        .distribution-section {
-            background: linear-gradient(135deg, rgba(10, 10, 15, 0.8) 0%, rgba(26, 26, 46, 0.8) 100%);
-            border-radius: 20px;
-            padding: 50px 40px;
-            margin: 60px 0;
-            position: relative;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                0 0 50px rgba(0, 212, 255, 0.1);
-        }
-
-        .distribution-section::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--accent), var(--neon-purple), var(--neon-pink), var(--accent));
-            border-radius: 22px;
-            z-index: -1;
-            animation: borderGlow 3s infinite linear;
-            background-size: 400% 400%;
-        }
-
-        @keyframes borderGlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .distribution-container {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-        }
-
-        .distribution-chart {
-            position: relative;
-            width: 280px;
-            height: 280px;
-            margin: 0 auto;
-        }
-
-        .distribution-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .distribution-item {
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: var(--transition);
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .distribution-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .distribution-item:hover::before {
-            left: 100%;
-        }
-
-        .distribution-item:hover {
-            transform: translateX(10px);
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
-        }
-
-        .color-indicator {
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            margin-right: 20px;
-            box-shadow: 0 0 10px currentColor;
-            animation: indicatorPulse 2s infinite alternate;
-        }
-
-        @keyframes indicatorPulse {
-            0% { opacity: 0.7; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        .distribution-info {
-            flex: 1;
-        }
-
-        .distribution-info h4 {
-            color: white;
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-
-        .distribution-info p {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .distribution-percentage {
-            font-weight: 700;
-            font-size: 1.4rem;
-            color: var(--accent);
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        .service-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-            border-radius: 20px;
-            padding: 40px 30px;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-            text-align: center;
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 0 40px rgba(0, 212, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-            animation: iconFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .service-card h3 {
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        /* Roadmap Section */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding-left: 30px;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--accent), var(--neon-purple));
-            top: 0;
-            bottom: 0;
-            left: 15px;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        }
-
-        .timeline-item {
-            padding: 0 0 40px 30px;
-            position: relative;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .timeline-content {
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-            position: relative;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            transition: var(--transition);
-        }
-
-        .timeline-content:hover {
-            transform: translateX(10px);
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 
-                0 15px 35px rgba(0, 0, 0, 0.4),
-                0 0 30px rgba(0, 212, 255, 0.1);
-        }
-
-        .timeline-content::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            left: -10px;
-            background: linear-gradient(45deg, var(--accent), var(--neon-purple));
-            top: 30px;
-            border-radius: 50%;
-            z-index: 1;
-            border: 3px solid var(--dark);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
-        }
-
-        .timeline-date {
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        .timeline-content h3 {
-            color: white;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        /* Contact Section */
-        .contact-container {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-
-        .contact-item:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-right: 20px;
-            margin-top: 3px;
-            min-width: 30px;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            font-size: 1rem;
-            transition: var(--transition);
-            color: white;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Footer */
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-            margin-bottom: 50px;
-        }
-
-        .footer-column {
-            width: 100%;
-        }
-
-        .footer-links li {
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 1rem;
-            transition: var(--transition);
-            padding: 8px 0;
-            display: block;
-            position: relative;
-        }
-
-        .footer-links a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-        }
-
-        .footer-links a:hover::before {
-            width: 100%;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: floatAround 20s infinite linear;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        @keyframes floatAround {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(100px, 100px) rotate(90deg); }
-            50% { transform: translate(50px, 200px) rotate(180deg); }
-            75% { transform: translate(-50px, 100px) rotate(270deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
-        }
-
-        /* Responsive Design - Tablet */
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 3.5rem;
-            }
-            
-            h2 {
-                font-size: 2.5rem;
-            }
-            
-            section {
-                padding: 100px 0;
-            }
-            
-            .hero h1 {
-                font-size: 4rem;
-            }
-            
-            .hero p {
-                font-size: 1.4rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: row;
-                justify-content: center;
-                gap: 25px;
-            }
-            
-            .hero .btn {
-                width: auto;
-            }
-            
-            .crypto-stats {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 25px;
-            }
-            
-            .about-content {
-                flex-direction: row;
-                align-items: center;
-                gap: 60px;
-            }
-            
-            .about-text {
-                order: 1;
-                flex: 1;
-            }
-            
-            .about-image {
-                order: 2;
-                flex: 1;
-            }
-            
-            .distribution-container {
-                flex-direction: row;
-                align-items: center;
-            }
-            
-            .distribution-chart {
-                flex: 1;
-                width: 300px;
-                height: 300px;
-            }
-            
-            .distribution-list {
-                flex: 1;
-            }
-            
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .contact-container {
-                flex-direction: row;
-            }
-            
-            .footer-content {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 40px;
-            }
-            
-            .footer-column {
-                flex: 1;
-                min-width: 250px;
-            }
-        }
-
-        /* Responsive Design - Desktop */
-        @media (min-width: 992px) {
-            h1 {
-                font-size: 4rem;
-            }
-            
-            h2 {
-                font-size: 3rem;
-            }
-            
-            .hero h1 {
-                font-size: 4.5rem;
-            }
-            
-            .services-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .distribution-chart {
-                width: 350px;
-                height: 350px;
-            }
-            
-            .timeline {
-                padding-left: 0;
-            }
-            
-            .timeline::after {
-                left: 50%;
-            }
-            
-            .timeline-item {
-                width: 50%;
-                padding: 10px 40px;
-            }
-            
-            .timeline-item:nth-child(odd) {
-                left: 0;
-            }
-            
-            .timeline-item:nth-child(even) {
-                left: 50%;
-            }
-            
-            .timeline-content::after {
-                width: 25px;
-                height: 25px;
-                border-width: 4px;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-content::after {
-                right: -12px;
-                left: auto;
-            }
-            
-            .timeline-item:nth-child(even) .timeline-content::after {
-                left: -12px;
-            }
-        }
-
-        /* Chart Styles */
-        canvas {
-            max-width: 100%;
-            height: auto;
-            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
-        }
-
-        /* Particle Effects */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
+        /* === Base Font and Color Settings === */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0b0e14; color: #ffffff; }
+        a { text-decoration: none; color: inherit; }
+
+        /* === Top Ticker === */
+        .top-ticker { background-color: #1a1f2e; font-size: 12px; padding: 8px 20px; color: #a1a7bb; display: flex; justify-content: space-between; border-bottom: 1px solid #222531; }
+        .ticker-stats span { margin-right: 20px; }
+
+        /* === Navigation Bar === */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background-color: #0b0e14; border-bottom: 1px solid #222531; position: sticky; top: 0; z-index: 100; }
+        .brand { display: flex; align-items: center; gap: 10px; }
+        .brand img { width: 40px; height: 40px; border-radius: 50%; background-color: #0b0e14; border: 1px solid #3861fb; }
+        .brand h1 { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 25px; font-size: 14px; font-weight: 600; }
+        .nav-links a:hover { color: #3861fb; }
+
+        /* === Hero Section === */
+        .hero { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .hero h2 { font-size: 28px; margin-bottom: 10px; }
+        .hero p { color: #a1a7bb; font-size: 14px; max-width: 600px; line-height: 1.6; margin-bottom: 20px; }
+        .live-indicator { display: inline-flex; align-items: center; gap: 8px; background: #1a1f2e; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; color: #16c784; border: 1px solid #222531; }
+        .dot { width: 8px; height: 8px; background-color: #16c784; border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(22, 199, 132, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(22, 199, 132, 0); } 100% { box-shadow: 0 0 0 0 rgba(22, 199, 132, 0); } }
+
+        /* === Advanced Trading Terminal Section === */
+        .terminal-section { max-width: 1200px; margin: 0 auto 50px auto; padding: 0 20px; }
+        .terminal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .terminal-header h3 { font-size: 20px; display: flex; align-items: center; gap: 10px; }
+        .terminal-header h3::before { content: ''; display: inline-block; width: 10px; height: 10px; background-color: #3861fb; border-radius: 50%; box-shadow: 0 0 8px #3861fb; }
+        .terminal-container { width: 100%; height: 650px; background-color: #1a1f2e; border-radius: 12px; border: 1px solid #222531; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: block; }
+
+        /* === Market Table === */
+        .market-table-container { max-width: 1200px; margin: 0 auto; overflow-x: auto; padding: 0 20px 40px 20px; }
+        table { width: 100%; border-collapse: collapse; text-align: right; }
+        th, td { padding: 16px 10px; border-bottom: 1px solid #222531; font-size: 14px; transition: background-color 0.3s ease; }
+        th { color: #a1a7bb; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+        th.left, td.left { text-align: left; }
+        tbody tr:hover { background-color: #1a1f2e; }
+
+        .highlight-row { background-color: rgba(56, 97, 251, 0.1); border-left: 4px solid #3861fb; }
+        .highlight-row:hover { background-color: rgba(56, 97, 251, 0.2) !important; }
+
+        .coin-name-cell { display: flex; align-items: center; gap: 10px; font-weight: bold; }
+        .coin-name-cell img { width: 24px; height: 24px; border-radius: 50%; }
+        .coin-ticker { color: #a1a7bb; font-weight: normal; font-size: 12px; background: #222531; padding: 2px 6px; border-radius: 4px; }
+
+        .btn-trade { background-color: #3861fb; border: 1px solid #3861fb; color: white; padding: 6px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-trade:hover { background-color: #2c4dd1; }
+        .btn-view { background-color: transparent; border: 1px solid #444; color: #aaa; padding: 5px 12px; border-radius: 6px; cursor: pointer; }
+        .btn-view:hover { border-color: #fff; color: #fff; }
+
+        /* === AI Badges (Quantitative Signals) === */
+        .ai-badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+        .ai-strong-buy { color: #16c784; background: rgba(22,199,132,0.15); border: 1px solid rgba(22,199,132,0.3); }
+        .ai-buy { color: #16c784; background: transparent; border: 1px solid #16c784; }
+        .ai-hold { color: #a1a7bb; background: rgba(161,167,187,0.1); border: 1px solid rgba(161,167,187,0.3); }
+        .ai-sell { color: #ea3943; background: transparent; border: 1px solid #ea3943; }
+        .ai-strong-sell { color: #ea3943; background: rgba(234,57,67,0.15); border: 1px solid rgba(234,57,67,0.3); }
+        .ai-quanx-core { color: #3861fb; background: rgba(56,97,251,0.15); border: 1px solid #3861fb; box-shadow: 0 0 8px rgba(56,97,251,0.4); }
+
+        #loading-message { text-align: center; padding: 50px; color: #a1a7bb; font-style: italic; font-size: 16px; }
+        .spinner { border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #3861fb; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 15px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* === Real-Time Flashing Animations === */
+        @keyframes flashGreen { 0% { background-color: rgba(22, 199, 132, 0.4); color: #16c784; } 100% { background-color: transparent; } }
+        @keyframes flashRed { 0% { background-color: rgba(234, 57, 67, 0.4); color: #ea3943; } 100% { background-color: transparent; } }
+        .flash-up { animation: flashGreen 0.8s ease-out; color: #16c784; }
+        .flash-down { animation: flashRed 0.8s ease-out; color: #ea3943; }
+
+        footer { border-top: 1px solid #222531; padding: 30px 20px; text-align: center; color: #a1a7bb; font-size: 14px; margin-top: 50px; }
     </style>
 </head>
 <body>
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
 
-    <!-- Navigation Overlay -->
-    <div class="nav-overlay"></div>
+    <div class="top-ticker">
+        <div class="ticker-stats">
+            <span>Solana Network: <strong style="color: #16c784;">Online</strong></span>
+            <span>QUANX Quant Engine: <strong style="color: #3861fb;">Active (Live Scan)</strong></span>
+            <span>Total Coins Loaded: <strong>250+</strong></span>
+        </div>
+    </div>
 
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <img src="https://i.imgur.com/s2b9bV8.png" alt="MTC COIN Logo" class="logo-img">
-                <h1>MTC<span> COIN</span></h1>
-            </div>
-            <div class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            <nav>
-                <div class="close-menu">
-                    <i class="fas fa-times"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#satoshi">Satoshi</a></li>
-                    <li><a href="#distribution">Token Distribution</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#roadmap">Roadmap</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="https://i.imgur.com/WP0q7gP.png" alt="QUANX Logo">
+            <h1>QUANX Blockchain</h1>
+        </div>
+        <div class="nav-links">
+            <a href="#">Market Dashboard</a>
+            <a href="#">AI Trading Bots</a>
+            <a href="#">Python SDK</a>
+            <a href="https://adem55547.github.io/QUANX.com-/" target="_blank">Old Portal</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h2>Live Quantitative Trading Dashboard</h2>
+        <p>QUANX integrates Artificial Intelligence with the Solana blockchain. Our Quant Engine continuously scans global markets to provide real-time AI trading signals.</p>
+        <div class="live-indicator">
+            <div class="dot"></div> QUANX AI Engine is calculating live signals
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>METTECH-TECNO COMPANY</h1>
-            <p>The Future of Decentralized Governance and Cryptocurrency</p>
-            <p>MTC COIN is a revolutionary cryptocurrency under development, designed to empower decentralized autonomous organizations and transform digital governance.</p>
-            <div class="hero-buttons">
-                <a href="#distribution" class="btn">Token Distribution</a>
-                <a href="#contact" class="btn btn-secondary">Join Presale</a>
-            </div>
-            
-            <div class="crypto-stats">
-                <div class="stat-card">
-                    <div class="stat-value">5M</div>
-                    <div class="stat-label">Total Supply</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">ETH</div>
-                    <div class="stat-label">Built On</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">Q4 2025</div>
-                    <div class="stat-label">Launch Date</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">DAO</div>
-                    <div class="stat-label">Governance</div>
-                </div>
-            </div>
+    <!-- ======== Advanced Terminal Section ======== -->
+    <section class="terminal-section">
+        <div class="terminal-header">
+            <h3>QUANX / SOL Advanced Terminal</h3>
+            <button class="btn-trade" onclick="window.open('https://pump.fun/coin/E97ZGqy2kiXNGBuTNimJRVKJL7gZU7EJmwFii2zopump', '_blank')">Execute Trade</button>
+        </div>
+        <div class="terminal-container">
+            <iframe 
+                height="100%" 
+                width="100%" 
+                id="geckoterminal-embed" 
+                title="GeckoTerminal Embed" 
+                src="https://www.geckoterminal.com/solana/pools/EJWy9UvMgd3tz6q8uRM6ED5FMkXMVrN7ULGPW9nZRNmf?embed=1&info=1&swaps=1" 
+                frameborder="0" 
+                allow="clipboard-write" 
+                allowfullscreen>
+            </iframe>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <h2>About MTC COIN</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>MTC COIN is an innovative cryptocurrency project currently under development, designed to revolutionize decentralized governance and community-driven decision making in the blockchain space.</p>
-                    <p>Our mission is to create a truly decentralized ecosystem where token holders have direct voting power over the development, treasury management, and future direction of the project.</p>
-                    <p>Built on the Ethereum blockchain with plans for multi-chain expansion, MTC COIN leverages smart contracts to ensure transparent, secure, and efficient governance processes.</p>
-                    <p>The project is led by a team of blockchain enthusiasts and developers committed to creating a sustainable and community-owned cryptocurrency with real-world utility.</p>
-                    <a href="#distribution" class="btn">View Token Distribution</a>
-                </div>
-                <div class="about-image">
-                    <img src="https://i.imgur.com/ZGGOSWB.png" alt="MTC COIN Cryptocurrency">
-                </div>
-            </div>
+    <!-- ======== Market Table Section ======== -->
+    <section class="market-table-container">
+        <h3 style="margin-bottom: 20px; color: #fff; border-left: 4px solid #3861fb; padding-left: 10px;">Global Top 250 & AI Signals</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th class="left">#</th>
+                    <th class="left">Name</th>
+                    <th>Price</th>
+                    <th>24h %</th>
+                    <th>Market Cap</th>
+                    <th>Volume (24h)</th>
+                    <th>QUANX AI Signal</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="crypto-table-body">
+                <!-- Coins will be injected here via JavaScript -->
+            </tbody>
+        </table>
+        
+        <div id="loading-message">
+            <div class="spinner"></div>
+            QUANX Quant Engine is analyzing 250 markets...
         </div>
     </section>
 
-    <!-- Satoshi Nakamoto Section -->
-    <section class="satoshi-section" id="satoshi">
-        <div class="container">
-            <h2>The Visionary: Satoshi Nakamoto</h2>
-            <div class="satoshi-container">
-                <div class="satoshi-image">
-                    <img src="https://i.imgur.com/X6GcY9f.jpg" alt="Satoshi Nakamoto">
-                </div>
-                <h3>Satoshi Nakamoto</h3>
-                <p>The anonymous creator of Bitcoin and the blockchain technology that inspired MTC COIN.</p>
-                <p>"The root problem with conventional currency is all the trust that's required to make it work. The central bank must be trusted not to debase the currency, but the history of fiat currencies is full of breaches of that trust."</p>
-                <p>Inspired by Satoshi's vision of decentralized trust, MTC COIN continues the journey towards true financial sovereignty.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Token Distribution Section -->
-    <section class="distribution-section" id="distribution">
-        <div class="container">
-            <h2>Token Distribution</h2>
-            <div class="distribution-container">
-                <div class="distribution-chart">
-                    <canvas id="tokenChart"></canvas>
-                </div>
-                <div class="distribution-list">
-                    <div class="distribution-item">
-                        <div class="color-indicator" style="background-color: #2196F3;"></div>
-                        <div class="distribution-info">
-                            <h4>Public Sale</h4>
-                            <p>Available to the community during presale and public launch</p>
-                        </div>
-                        <div class="distribution-percentage">40%</div>
-                    </div>
-                    <div class="distribution-item">
-                        <div class="color-indicator" style="background-color: #4CAF50;"></div>
-                        <div class="distribution-info">
-                            <h4>Ecosystem & Development</h4>
-                            <p>Funds for platform development, partnerships, and growth</p>
-                        </div>
-                        <div class="distribution-percentage">25%</div>
-                    </div>
-                    <div class="distribution-item">
-                        <div class="color-indicator" style="background-color: #FF9800;"></div>
-                        <div class="distribution-info">
-                            <h4>Team & Advisors</h4>
-                            <p>Allocated to core team members with 3-year vesting period</p>
-                        </div>
-                        <div class="distribution-percentage">15%</div>
-                    </div>
-                    <div class="distribution-item">
-                        <div class="color-indicator" style="background-color: #9C27B0;"></div>
-                        <div class="distribution-info">
-                            <h4>Liquidity Pool</h4>
-                            <p>Ensures stable trading and market operations</p>
-                        </div>
-                        <div class="distribution-percentage">12%</div>
-                    </div>
-                    <div class="distribution-item">
-                        <div class="color-indicator" style="background-color: #F44336;"></div>
-                        <div class="distribution-info">
-                            <h4>Marketing & Community</h4>
-                            <p>Funds for marketing campaigns and community rewards</p>
-                        </div>
-                        <div class="distribution-percentage">8%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <h2>Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Secure Wallet</h3>
-                    <p>Multi-signature wallet with advanced security features for safe storage of MTC tokens.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-vote-yea"></i>
-                    </div>
-                    <h3>DAO Governance</h3>
-                    <p>Participate in decision-making through our decentralized autonomous organization platform.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <h3>Decentralized Exchange</h3>
-                    <p>Trade MTC tokens securely on our integrated decentralized exchange platform.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Roadmap Section -->
-    <section id="roadmap">
-        <div class="container">
-            <h2>Roadmap</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Q4 2024</div>
-                        <h3>Project Launch & Team Formation</h3>
-                        <p>Concept development and core team assembly with cutting-edge blockchain research.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Q1 2025</div>
-                        <h3>Smart Contract Development</h3>
-                        <p>Development and auditing of MTC COIN smart contracts with multi-layered security.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Q2 2025</div>
-                        <h3>Private Presale</h3>
-                        <p>Initial funding round for strategic partners and early supporters with exclusive benefits.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Q3 2025</div>
-                        <h3>Public Presale Launch</h3>
-                        <p>Community presale event with bonus incentives and innovative token distribution.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Q4 2025</div>
-                        <h3>Mainnet Launch & DEX Listing</h3>
-                        <p>Official launch on mainnet and listing on major decentralized exchanges worldwide.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Get in Touch</h3>
-                    <p>Join the MTC COIN community and be part of the decentralized revolution.</p>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@mtccoin.com</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-paper-plane"></i>
-                        </div>
-                        <div>
-                            <h4>Telegram</h4>
-                            <p>@mtccoin_official</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-twitter"></i>
-                        </div>
-                        <div>
-                            <h4>Twitter</h4>
-                            <p>@mtccoin</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <h3>Join Presale Waitlist</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Email Address" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Telegram Username" required>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" required>
-                                <option value="">Select Investment Range</option>
-                                <option value="small">$100 - $1,000</option>
-                                <option value="medium">$1,000 - $10,000</option>
-                                <option value="large">$10,000+</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-accent">Join Waitlist</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); color: white; padding: 80px 0 40px; border-top: 1px solid rgba(0, 212, 255, 0.2);">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <div class="logo">
-                        <img src="https://i.imgur.com/s2b9bV8.png" alt="MTC COIN Logo" class="logo-img">
-                        <h1>MTC<span> COIN</span></h1>
-                    </div>
-                    <p style="margin-top: 20px; color: rgba(255, 255, 255, 0.7);">The Future of Decentralized Governance and Cryptocurrency</p>
-                    <div style="margin-top: 20px;">
-                        <a href="#" style="color: var(--accent); margin-right: 15px; font-size: 1.2rem;"><i class="fab fa-telegram"></i></a>
-                        <a href="#" style="color: var(--accent); margin-right: 15px; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: var(--accent); margin-right: 15px; font-size: 1.2rem;"><i class="fab fa-discord"></i></a>
-                        <a href="#" style="color: var(--accent); font-size: 1.2rem;"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 style="color: white; margin-bottom: 25px;">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#satoshi">Satoshi</a></li>
-                        <li><a href="#distribution">Token Distribution</a></li>
-                        <li><a href="#roadmap">Roadmap</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 style="color: white; margin-bottom: 25px;">Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Whitepaper</a></li>
-                        <li><a href="#">Audit Report</a></li>
-                        <li><a href="#">GitHub</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h4 style="color: white; margin-bottom: 25px;">Legal</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2024 METTECH-TECNO COMPANY. All rights reserved. MTC COIN is a decentralized cryptocurrency project.</p>
-                <p style="margin-top: 10px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.5);">Cryptocurrency investments are subject to market risks. Please do your own research before investing.</p>
-            </div>
-        </div>
+    <footer>
+        <p>&copy; 2026 QUANX Blockchain & AI Quantitative Trading. Built on Solana.</p>
+        <p style="margin-top: 10px; font-size: 12px; color: #5c667b;">QNX Contract: E97ZGqy2kiXNGBuTNimJRVKJL7gZU7EJmwFii2zopump</p>
     </footer>
 
-    <!-- Chart.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script>
-        // Mobile Navigation
-        const mobileMenuBtn = document.querySelector('.mobile-menu');
-        const closeMenuBtn = document.querySelector('.close-menu');
-        const nav = document.querySelector('nav');
-        const navOverlay = document.querySelector('.nav-overlay');
-        const navLinks = document.querySelectorAll('nav a');
+        // Formatting functions
+        const formatPrice = (value, isSmallToken = false) => {
+            if (!value) return "$0.00";
+            const num = parseFloat(value);
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency', currency: 'USD',
+                minimumFractionDigits: isSmallToken ? 8 : (num < 1 ? 4 : 2),
+                maximumFractionDigits: isSmallToken ? 8 : (num < 1 ? 4 : 2)
+            }).format(num);
+        };
 
-        // Toggle mobile menu
-        function toggleMenu() {
-            nav.classList.toggle('active');
-            navOverlay.classList.toggle('active');
-            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        const formatLargeNumber = (value) => {
+            if (!value) return "$0";
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency', currency: 'USD', maximumFractionDigits: 0
+            }).format(value);
+        };
+
+        const formatPercentage = (value) => {
+            if (value === undefined || value === null) return `<span style="color: #a1a7bb;">0.00%</span>`;
+            const num = parseFloat(value);
+            const color = num >= 0 ? '#16c784' : '#ea3943';
+            const arrow = num >= 0 ? '▲' : '▼';
+            return `<span style="color: ${color}; font-weight: bold;">${arrow} ${Math.abs(num).toFixed(2)}%</span>`;
+        };
+
+        // ==============================================================
+        // QUANX AI QUANTITATIVE ENGINE (Translated to JavaScript)
+        // ==============================================================
+        const generateAISignal = (priceChangePct) => {
+            if (priceChangePct === undefined || priceChangePct === null) return `<span class="ai-badge ai-hold">⚪ ANALYZING</span>`;
+            const pct = parseFloat(priceChangePct);
+            
+            // خوارزمية مبسطة تحاكي الزخم الكمي بناءً على تحركات السعر اللحظية
+            if (pct >= 5) return `<span class="ai-badge ai-strong-buy">🟢 STRONG BUY</span>`;
+            if (pct >= 1.5 && pct < 5) return `<span class="ai-badge ai-buy">🟢 BUY</span>`;
+            if (pct > -1.5 && pct < 1.5) return `<span class="ai-badge ai-hold">⚪ HOLD</span>`;
+            if (pct <= -1.5 && pct > -5) return `<span class="ai-badge ai-sell">🔴 SELL</span>`;
+            if (pct <= -5) return `<span class="ai-badge ai-strong-sell">🔴 STRONG SELL</span>`;
+            
+            return `<span class="ai-badge ai-hold">⚪ HOLD</span>`;
+        };
+        // ==============================================================
+
+        async function fetchInitialData() {
+            const tableBody = document.getElementById('crypto-table-body');
+            const loadingMessage = document.getElementById('loading-message');
+            let htmlContent = '';
+
+            try {
+                // 1. Fetch QUANX Data
+                const qnxResponse = await fetch('https://api.geckoterminal.com/api/v2/networks/solana/pools/EJWy9UvMgd3tz6q8uRM6ED5FMkXMVrN7ULGPW9nZRNmf');
+                const qnxData = await qnxResponse.json();
+                const qnxPool = qnxData.data.attributes;
+                const qnxPrice = qnxPool.base_token_price_usd;
+
+                htmlContent += `
+                    <tr class="highlight-row">
+                        <td class="left">⭐</td>
+                        <td class="left">
+                            <div class="coin-name-cell">
+                                <img src="https://i.imgur.com/WP0q7gP.png" alt="QUANX Logo">
+                                QUANX
+                                <span class="coin-ticker">QNX</span>
+                            </div>
+                        </td>
+                        <td id="price-QNX" data-price="${qnxPrice}">${formatPrice(qnxPrice, true)}</td>
+                        <td id="pct-QNX">${formatPercentage(qnxPool.price_change_percentage?.h24 || 0)}</td>
+                        <td>${formatLargeNumber(qnxPool.fdv_usd || qnxPool.reserve_in_usd)}</td>
+                        <td>${formatLargeNumber(qnxPool.volume_usd?.h24 || 0)}</td>
+                        <td id="ai-QNX"><span class="ai-badge ai-quanx-core">🤖 QUANX NATIVE</span></td>
+                        <td><button class="btn-trade" onclick="window.scrollTo({top: 250, behavior: 'smooth'})">View Chart</button></td>
+                    </tr>
+                `;
+            } catch (error) {
+                console.error("Error fetching QNX data:", error);
+            }
+
+            try {
+                // 2. Fetch Top 250 Coins from CoinGecko
+                const cgResponse = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false');
+                const topCoins = await cgResponse.json();
+
+                let rank = 1;
+                topCoins.forEach(coin => {
+                    const symbol = coin.symbol.toUpperCase();
+                    htmlContent += `
+                        <tr>
+                            <td class="left">${rank}</td>
+                            <td class="left">
+                                <div class="coin-name-cell">
+                                    <img src="${coin.image}" alt="${symbol}">
+                                    ${coin.name}
+                                    <span class="coin-ticker">${symbol}</span>
+                                </div>
+                            </td>
+                            <td id="price-${symbol}" data-price="${coin.current_price}">${formatPrice(coin.current_price, false)}</td>
+                            <td id="pct-${symbol}">${formatPercentage(coin.price_change_percentage_24h)}</td>
+                            <td>${formatLargeNumber(coin.market_cap)}</td>
+                            <td>${formatLargeNumber(coin.total_volume)}</td>
+                            <td id="ai-${symbol}">${generateAISignal(coin.price_change_percentage_24h)}</td>
+                            <td><button class="btn-view" onclick="window.open('https://www.coingecko.com/en/coins/${coin.id}', '_blank')">View</button></td>
+                        </tr>
+                    `;
+                    rank++;
+                });
+
+            } catch (error) {
+                console.error("Error fetching global market data:", error);
+            }
+
+            loadingMessage.style.display = 'none';
+            tableBody.innerHTML = htmlContent;
+
+            // Start Live Updates
+            startLiveUpdates();
         }
 
-        mobileMenuBtn.addEventListener('click', toggleMenu);
-        closeMenuBtn.addEventListener('click', toggleMenu);
-        navOverlay.addEventListener('click', toggleMenu);
+        // 3. Live WebSocket Updates for Prices AND AI Signals
+        function startLiveUpdates() {
+            const ws = new WebSocket('wss://stream.binance.com:9443/ws/!ticker@arr');
 
-        // Close menu when clicking on links
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                navOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    // Close mobile menu if open
-                    if (nav.classList.contains('active')) {
-                        toggleMenu();
-                    }
-                    
-                    // Smooth scroll
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+                data.forEach(ticker => {
+                    if (ticker.s.endsWith('USDT')) {
+                        const symbol = ticker.s.slice(0, -4); 
+                        
+                        const priceElement = document.getElementById(`price-${symbol}`);
+                        const pctElement = document.getElementById(`pct-${symbol}`);
+                        const aiElement = document.getElementById(`ai-${symbol}`); // عنصر الذكاء الاصطناعي
 
-        // Form submission
-        document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for joining the MTC COIN presale waitlist! We will contact you with updates soon.');
-            this.reset();
-        });
+                        // تحديث السعر والوميض
+                        if (priceElement) {
+                            const oldPrice = parseFloat(priceElement.getAttribute('data-price'));
+                            const newPrice = parseFloat(ticker.c);
 
-        // Token Distribution Chart
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('tokenChart').getContext('2d');
-            
-            // Chart data
-            const chartData = {
-                labels: ['Public Sale', 'Ecosystem & Development', 'Team & Advisors', 'Liquidity Pool', 'Marketing & Community'],
-                datasets: [{
-                    data: [40, 25, 15, 12, 8],
-                    backgroundColor: [
-                        '#2196F3',
-                        '#4CAF50',
-                        '#FF9800',
-                        '#9C27B0',
-                        '#F44336'
-                    ],
-                    borderWidth: 3,
-                    borderColor: '#0a0a0f',
-                    hoverBorderWidth: 5,
-                    hoverBorderColor: '#00d4ff'
-                }]
-            };
-            
-            // Chart configuration
-            const config = {
-                type: 'doughnut',
-                data: chartData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.parsed}%`;
-                                }
-                            },
-                            backgroundColor: 'rgba(15, 15, 30, 0.9)',
-                            titleColor: '#00d4ff',
-                            bodyColor: '#ffffff',
-                            borderColor: '#00d4ff',
-                            borderWidth: 1
+                            if (newPrice !== oldPrice && !isNaN(newPrice)) {
+                                priceElement.innerHTML = formatPrice(newPrice);
+                                priceElement.setAttribute('data-price', newPrice);
+                                
+                                priceElement.classList.remove('flash-up', 'flash-down');
+                                void priceElement.offsetWidth; 
+                                priceElement.classList.add(newPrice > oldPrice ? 'flash-up' : 'flash-down');
+                            }
                         }
-                    },
-                    cutout: '60%',
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true,
-                        duration: 2000,
-                        easing: 'easeOutQuart'
-                    }
-                }
-            };
-            
-            // Create chart
-            const tokenChart = new Chart(ctx, config);
-            
-            // Animate chart on scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        tokenChart.update();
-                        observer.unobserve(entry.target);
+
+                        // تحديث نسبة التغيير وقرار الذكاء الاصطناعي بناءً على السوق الحي
+                        if (pctElement && aiElement) {
+                            pctElement.innerHTML = formatPercentage(ticker.P);
+                            // إعطاء الإشارة للذكاء الاصطناعي لتحديث تقييمه
+                            aiElement.innerHTML = generateAISignal(ticker.P);
+                        }
                     }
                 });
-            }, { threshold: 0.5 });
-            
-            observer.observe(document.getElementById('tokenChart'));
-        });
+            };
 
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                header.style.backgroundColor = 'rgba(15, 15, 30, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-                header.style.boxShadow = '0 2px 20px rgba(0, 212, 255, 0.2)';
-            } else {
-                header.style.backgroundColor = 'rgba(15, 15, 30, 0.95)';
-                header.style.boxShadow = '0 2px 10px rgba(0, 212, 255, 0.1)';
-            }
-        });
+            ws.onerror = (err) => { console.error("WebSocket Error:", err); };
+        }
 
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const colors = ['#00d4ff', '#b967ff', '#ff00ff'];
-            
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'floating-element';
-                particle.style.width = `${Math.random() * 100 + 50}px`;
-                particle.style.height = particle.style.width;
-                particle.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]}${Math.random() * 0.2 + 0.1} 0%, transparent 70%)`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
+        async function updateQNXPrice() {
+            try {
+                const qnxResponse = await fetch('https://api.geckoterminal.com/api/v2/networks/solana/pools/EJWy9UvMgd3tz6q8uRM6ED5FMkXMVrN7ULGPW9nZRNmf');
+                const qnxData = await qnxResponse.json();
+                const qnxPool = qnxData.data.attributes;
+                const qnxPrice = qnxPool.base_token_price_usd;
                 
-                particlesContainer.appendChild(particle);
-            }
+                const priceElement = document.getElementById('price-QNX');
+                const pctElement = document.getElementById('pct-QNX');
+
+                if (priceElement) {
+                    const oldPrice = parseFloat(priceElement.getAttribute('data-price'));
+                    if (qnxPrice !== oldPrice) {
+                        priceElement.innerHTML = formatPrice(qnxPrice, true);
+                        priceElement.setAttribute('data-price', qnxPrice);
+                        priceElement.classList.remove('flash-up', 'flash-down');
+                        void priceElement.offsetWidth;
+                        priceElement.classList.add(qnxPrice > oldPrice ? 'flash-up' : 'flash-down');
+                    }
+                    if (pctElement) {
+                        pctElement.innerHTML = formatPercentage(qnxPool.price_change_percentage?.h24 || 0);
+                    }
+                }
+            } catch (e) {}
         }
 
-        createParticles();
-
-        // Add mouse move effect
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            document.querySelectorAll('.floating-element').forEach(element => {
-                element.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
-            });
-        });
-
-        // Add typing effect to hero text
-        const heroText = document.querySelector('.hero h1');
-        const originalText = heroText.textContent;
-        heroText.textContent = '';
-        
-        let i = 0;
-        function typeWriter() {
-            if (i < originalText.length) {
-                heroText.textContent += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-        
-        // Start typing effect when page loads
-        setTimeout(typeWriter, 1000);
+        // Initialize Load
+        fetchInitialData();
+        setInterval(updateQNXPrice, 20000);
     </script>
 </body>
 </html>
